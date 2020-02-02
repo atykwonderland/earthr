@@ -1,0 +1,25 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "First try for Heroku",
+  "main": "App.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atykwonderland/earthr.git"
+  },
+  "author": "alice-kang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atykwonderland/earthr/issues"
+  },
+  "homepage": "https://github.com/atykwonderland/earthr#readme"
+}
