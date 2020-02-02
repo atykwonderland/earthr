@@ -1,10 +1,31 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import APIClient from './api/api.js'
+class App extends component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        foods:[]
+    }
+  }
+  componentDidMount = async () => {
+    this.setState({ isLoading: true })
 
-function App() {
-  return (
-    <div className="App">
+    await APIClient.getFoods().then(foods => {
+        this.setState({
+            foods: foods.data.data,
+        })
+    })
+  }
+  
+  render (){
+  
+
+    
+    
+    return( 
+      <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,9 +39,13 @@ function App() {
         >
           Learn React
         </a>
+        {this.state.foods[0].code}
       </header>
     </div>
-  );
+
+        
+    )
+}
 }
 
 export default App;
