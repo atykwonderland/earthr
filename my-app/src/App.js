@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import APIClient from './api/api.js'
-class App extends component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,7 +39,6 @@ class App extends component {
         >
           Learn React
         </a>
-        {this.state.foods[0].code}
       </header>
     </div>
 
