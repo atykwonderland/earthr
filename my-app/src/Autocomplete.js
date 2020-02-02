@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Autocomplete.css';
+import { Link,Redirect } from 'react-router-dom'
 
 export class Autocomplete extends Component {
   static propTypes =
   {
-    options: PropTypes.instanceOf(Array).isRequired
+    options: PropTypes.instanceOf(Array).isRequired,
+    redirect: false
   };
 
 
@@ -17,8 +19,7 @@ export class Autocomplete extends Component {
     userInput: ''
   };
 
-  //setup
-
+  
 //when you start typing, you feed your input into this.props and e.currentTarget.value, and optionName
   onChange = (e) =>
   {
@@ -26,11 +27,16 @@ export class Autocomplete extends Component {
 
     const { options } = this.props;
     const userInput = e.currentTarget.value;
-
-    const filteredOptions = options.filter(
-      (optionName) =>
-        optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+    // Filter our suggestions that don't contain the user's input
+    const fs = options.filter(
+      suggestion =>
+        suggestion.product_name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
+    const filteredOptions = Array.from(new Set( fs.map(
+        suggestion =>
+            suggestion
+    )))
+    
 
     this.setState({
       activeOption: 0,
@@ -99,13 +105,14 @@ export class Autocomplete extends Component {
                 className = 'option-active';
               }
               return (
-                <li className={className} key={optionName} onClick={onClick}>
-                  {optionName}
-                    <a href="https://www.google.com" >
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-  Click here for more</a>
+                <li className={className} key={optionName.product_name} >
+                  {optionName.product_name}
+                  <Link to={{pathname: '/result',
+                    state: {
+                      data: optionName
+                    }}} >
+                                Select
+                  </Link>
 
                 </li>
               );
