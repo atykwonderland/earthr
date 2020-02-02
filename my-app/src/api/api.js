@@ -1,12 +1,9 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://earthr.herokuapp.com:33507',
+    baseURL: 'http://127.0.0.1:5000',
 })
+export const getAllFoods = () => api.get(`/foods`)
 
-class APIClient{
-    getFoods(){
-        return this.perform('get', '/foods')
-    }
-}
-export default APIClient;
+
+export default getAllFoods;

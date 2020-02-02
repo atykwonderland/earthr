@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,jsonify
 import json
 from db import col
 app = Flask(__name__)
@@ -21,7 +21,9 @@ def getAllFoods():
             dic["packaging"] = str(d["packaging"])
             dic["carbon-footprint_100g"] = int(d["carbon-footprint_100g"])
             response.append(dic)
-    return json.dumps(response).encode('utf-8'), 200
+    response = jsonify({'data':response})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
     
 
 if __name__ == '__main__':

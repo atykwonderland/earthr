@@ -1,21 +1,23 @@
-import React from 'react';
+import React,{Component,useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import APIClient from './api/api.js'
-class App extends component {
+import getAllFoods from './api/api.js'
+class App extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
         foods:[]
     }
   }
+  
   componentDidMount = async () => {
-    this.setState({ isLoading: true })
-
-    await APIClient.getFoods().then(foods => {
+    getAllFoods().then(foods => {
         this.setState({
-            foods: foods.data.data,
+            foods: foods.data,
         })
+        console.log("hi")
+        console.log(this.state.foods)
     })
   }
   
@@ -38,8 +40,8 @@ class App extends component {
           rel="noopener noreferrer"
         >
           Learn React
+         
         </a>
-        {this.state.foods[0].code}
       </header>
     </div>
 
